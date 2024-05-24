@@ -16,9 +16,6 @@ genre_counts.columns = ['genre', 'count']
 
 # Streamlit app layout
 st.title("Anime Streaming")
-st.subheader(" ",divider='grey')
-st.write("")
-st.write("")
 
 # Sidebar for filters
 st.sidebar.header("Filters")
@@ -50,52 +47,48 @@ layout_settings = {
     'yaxis_title_font_size': 18,
     'xaxis_tickfont_size': 14,
     'yaxis_tickfont_size': 14,
-    'legend_font_size': 16,
-    'title_font_size': 24,
+    'legend_font_size': 16
 }
 
 # Top 10 Anime by Rating
-#st.subheader("Top 10 Anime by Rating")
+st.subheader("Top 10 Anime by Rating")
 top_10_anime = grouped_df.nlargest(10, 'rating')[['name', 'rating']]
-fig1 = px.bar(top_10_anime, x='rating', y='name', orientation='h', title='Top 10 Anime by Rating', color_discrete_sequence=['#9932cc'])
-fig1.update_layout(xaxis_title='Rating', yaxis_title='Anime name', title_x=0.35, **layout_settings)
+fig1 = px.bar(top_10_anime, x='rating', y='name', orientation='h', color_discrete_sequence=['#9932cc'])
+fig1.update_layout(**layout_settings)
 st.plotly_chart(fig1)
 
 # Genre Distribution
-#st.subheader("Genre Distribution")
+st.subheader("Genre Distribution")
 # Explode genres into individual rows
 genre_df = filtered_df.copy()
 genre_df = genre_df.assign(genre=genre_df['genre'].str.split(', ')).explode('genre')
-fig2 = px.violin(genre_df, x='genre', y='rating', box=True, points="all", title='Genre Distribution', color_discrete_sequence=['#644dd3'])
-fig2.update_layout(xaxis_title='Genre', yaxis_title='Rating', xaxis=dict(tickangle=-45), title_x=0.35, **layout_settings)
+fig2 = px.violin(genre_df, x='genre', y='rating', box=True, points="all", color_discrete_sequence=['#644dd3'])
+fig2.update_layout(xaxis_title='Genre', yaxis_title='Rating', xaxis=dict(tickangle=-45), **layout_settings)
 st.plotly_chart(fig2)
 
 # Rating vs. Members Scatter Plot
-#st.subheader("Rating vs. Members")
-fig3 = px.scatter(grouped_df, x='rating', y='members', title='Relation between Rating and Members', color_discrete_sequence=['#9932cc'])
-fig3.update_layout(xaxis_title='Rating', yaxis_title='Members', title_x=0.2, **layout_settings)
+st.subheader("Rating vs. Members")
+fig3 = px.scatter(grouped_df, x='rating', y='members', color_discrete_sequence=['#9932cc'])
+fig3.update_layout(xaxis_title='Rating', yaxis_title='Members', **layout_settings)
 st.plotly_chart(fig3)
 
-# Bubble Chart: Rating vs. Episodes with Members as Size
-#st.subheader("Rating vs. Episodes")
-fig4 = px.scatter(grouped_df, x='rating', y='episodes', size='members', title='Relation among Rating, Episodes and Members', labels={'rating': 'Rating', 'members': 'Members', 'episodes': 'Number of Episodes'},
+# Bubble Chart: Rating vs. Members with Episodes as Size
+st.subheader("Rating vs. Members (Bubble Chart)")
+fig4 = px.scatter(grouped_df, x='rating', y='members', size='episodes', labels={'rating': 'Rating', 'members': 'Members', 'episodes': 'Number of Episodes'},
                   color_discrete_sequence=['#3265cc'])
-fig4.update_layout(xaxis_title='Rating', yaxis_title='Episodes', title_x=0.15, **layout_settings)
+fig4.update_layout(xaxis_title='Rating', yaxis_title='Members', **layout_settings)
 st.plotly_chart(fig4)
 
 # Type Distribution (Strip Plot)
-#st.subheader("Type Distribution")
-fig5 = px.strip(filtered_df, x='type', y='rating', title='Distribution of Anime Types', color='type',
+st.subheader("Type Distribution")
+fig5 = px.strip(filtered_df, x='type', y='rating', color='type',
                 color_discrete_sequence=['#9932cc'])
-fig5.update_layout(xaxis_title='Type', yaxis_title='Rating', title_x=0.3, **layout_settings)
+fig5.update_layout(xaxis_title='Type', yaxis_title='Rating', **layout_settings)
 st.plotly_chart(fig5)
 
 # Episodes vs. Rating
-#st.subheader("Episodes vs. Rating")
+st.subheader("Episodes vs. Rating")
 episodes_rating = filtered_df.groupby('episodes')['rating'].mean().reset_index()
-fig6 = px.line(episodes_rating, x='episodes', y='rating', markers=True, title='Episode Count Impact on Anime Average Ratings', color_discrete_sequence=['#644dd3'])
-fig6.update_layout(xaxis_title='Number of Episodes', yaxis_title='Average Rating', title_x=0.16, **layout_settings)
+fig6 = px.line(episodes_rating, x='episodes', y='rating', markers=True, color_discrete_sequence=['#644dd3'])
+fig6.update_layout(xaxis_title='Number of Episodes', yaxis_title='Average Rating', **layout_settings)
 st.plotly_chart(fig6)
-
-# Add a button that accesses a website
-st.link_button("Visit MyAnimeList Website", "https://myanimelist.net/")
