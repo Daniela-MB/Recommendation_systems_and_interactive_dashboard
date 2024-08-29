@@ -32,6 +32,7 @@ The current recommender systems face challenges with new users due to limited me
 
 
 #### References:
+
 Aggarwal, C.C. and Springer International Publishing Ag (2018). Recommender Systems: The Textbook. Cham Springer International Publishing Springer.
 
 docs.python.org. (n.d.). collections — Container datatypes — Python 3.8.3 documentation. [online] Available at: https://docs.python.org/3/library/collections.html. [Accessed 18 May 2024].
