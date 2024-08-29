@@ -6,7 +6,7 @@ A recommendation system is an algorithm that suggests relevant items to users by
 To optimize user satisfaction and retention by enhancing the effectiveness of anime recommendations, leveraging the growing popularity of anime.
 
 ## Datasets
-- The <a href="https://www.kaggle.com/datasets/CooperUnion/anime-recommendations-database" target="_blank">datasets</a> are from the Kaggle repository that was first gathered from myanimelist.net API. 
+The <a href="https://www.kaggle.com/datasets/CooperUnion/anime-recommendations-database" target="_blank">datasets</a> are from the Kaggle repository that was first gathered from myanimelist.net API. 
 
 ## Project execution
 
