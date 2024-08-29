@@ -31,7 +31,7 @@ To optimize user satisfaction and retention by enhancing the effectiveness of an
 The current recommender systems face challenges with new users due to limited metadata. Expanding metadata could improve recommendations and user retention, though it may add complexity. Collaborative filtering is effective for existing users but needs better content filtering for new and inactive users. A hybrid system might offer additional benefits.
 
 
-#### References:
+## References:
 
 Aggarwal, C.C. and Springer International Publishing Ag (2018). Recommender Systems: The Textbook. Cham Springer International Publishing Springer.
 
